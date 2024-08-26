@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: kustomize-app
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: kustomize-app
+    server: "https://CB280C47350B5AC0420D4CF8ABD259A4.gr7.us-east-2.eks.amazonaws.com"
+  project: default
+  source: 
+    path: kustomize-guestbook
+    repoURL: "https://github.com/enricay/argocd-example-apps.git"
+    targetRevision: master
+    kustomize:
+      namePrefix: staging-
+      commonLabels:
+        app: demo
+        environment: staging
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

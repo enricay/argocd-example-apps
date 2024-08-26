@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-chart-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/enricay/argocd-example-apps.git"  # URL of the Helm chart repository                           # Name of the Helm chart
+    targetRevision: master
+    path: my-chart                     # Version of the Helm chart to deploy
+    # helm:
+    #   releaseName: my-helm-release               # Name of the Helm release
+    #   parameters:                                # Optional parameters for customization
+    #   - name: service.type
+    #     value: LoadBalancer
+  destination:
+    server: "https://CB280C47350B5AC0420D4CF8ABD259A4.gr7.us-east-2.eks.amazonaws.com"      # Kubernetes cluster API server (default for in-cluster)
+    namespace: my-chart                   # Namespace to deploy the Helm app
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true                         # Automatically heal resources when they deviate from the desired state

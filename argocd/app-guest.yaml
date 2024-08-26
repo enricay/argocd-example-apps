@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: guestbook
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: guestbook
+    server: "https://CB280C47350B5AC0420D4CF8ABD259A4.gr7.us-east-2.eks.amazonaws.com"
+  project: default
+  source: 
+    path: guestbook
+    repoURL: "https://github.com/enricay/argocd-example-apps.git"
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

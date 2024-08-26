@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: 
+  name: manifest-app
+  namespace: argocd
+spec: 
+  destination: 
+    namespace: manifest-app
+    server: "https://CB280C47350B5AC0420D4CF8ABD259A4.gr7.us-east-2.eks.amazonaws.com"
+  project: default
+  source: 
+    path: guestbook-with-sub-directories
+    repoURL: "https://github.com/enricay/argocd-example-apps.git"
+    targetRevision: master
+    directory:
+      recurse: true
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
