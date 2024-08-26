@@ -28,3 +28,12 @@ resources:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+serviceAccount:
+  create: true  # Set this to `false` if you do not want to create a ServiceAccount
+  name: ""      # Optionally set a specific name for the ServiceAccount
+
+autoscaling:
+  enabled: false  # Set to true if you want to enable autoscaling
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
